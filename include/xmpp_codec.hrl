@@ -535,10 +535,6 @@
                         events = [] :: [binary()]}).
 -type muc_subscribe() :: #muc_subscribe{}.
 
--record(privilege_perm, {access :: 'message' | 'presence' | 'roster',
-                         type :: 'both' | 'get' | 'managed_entity' | 'none' | 'outgoing' | 'roster' | 'set'}).
--type privilege_perm() :: #privilege_perm{}.
-
 -record(sm_a, {h :: non_neg_integer(),
                xmlns = <<>> :: binary()}).
 -type sm_a() :: #sm_a{}.
@@ -653,6 +649,16 @@
 
 -record('see-other-host', {host :: binary() | inet:ip_address() | {binary() | inet:ip_address(),inet:port_number()}}).
 -type 'see-other-host'() :: #'see-other-host'{}.
+
+-record(privilege_namespace, {ns = <<>> :: binary(),
+                              type :: 'both' | 'get' | 'none' | 'set'}).
+-type privilege_namespace() :: #privilege_namespace{}.
+
+-record(privilege_perm, {access :: 'iq' | 'message' | 'presence' | 'roster',
+                         type :: 'both' | 'get' | 'managed_entity' | 'none' | 'outgoing' | 'roster' | 'set',
+                         push = true :: boolean(),
+                         namespace = [] :: [#privilege_namespace{}]}).
+-type privilege_perm() :: #privilege_perm{}.
 
 -record(vcard_geo, {lat :: 'undefined' | binary(),
                     lon :: 'undefined' | binary()}).
@@ -1515,6 +1521,7 @@
                         privacy_query() |
                         private() |
                         privilege() |
+                        privilege_namespace() |
                         privilege_perm() |
                         ps_affiliation() |
                         ps_error() |
