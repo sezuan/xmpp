@@ -324,9 +324,6 @@ get_mod(<<"query">>,
 get_mod(<<"displayed">>, <<"jabber:x:event">>) ->
     xep0022;
 get_mod(<<"start">>, <<"urn:xmpp:mam:tmp">>) -> xep0313;
-get_mod(<<"received">>, <<"urn:xmpp:carbons:2">>) ->
-    xep0280;
-get_mod(<<"x">>, <<"jabber:x:event">>) -> xep0022;
 get_mod(<<"general-error">>, <<"urn:xmpp:jingle:1">>) ->
     xep0166;
 get_mod(<<"external">>, <<"urn:xmpp:fasten:0">>) ->
@@ -1726,6 +1723,9 @@ get_mod(<<"bad-protocol">>,
     rfc6120;
 get_mod(<<"apply-to">>, <<"urn:xmpp:fasten:0">>) ->
     xep0422;
+get_mod(<<"received">>, <<"urn:xmpp:carbons:2">>) ->
+    xep0280;
+get_mod(<<"x">>, <<"jabber:x:event">>) -> xep0022;
 get_mod(Name, XMLNS) ->
     xmpp_codec_external:lookup(Name, XMLNS).
 
@@ -1825,7 +1825,6 @@ get_mod({adhoc_actions, _, _, _, _}) -> xep0050;
 get_mod({push_disable, _, _}) -> xep0357;
 get_mod({push_notification, _}) -> xep0357;
 get_mod({disco_item, _, _, _}) -> xep0030;
-get_mod({stat, _, _, _, _}) -> xep0039;
 get_mod({register,
          _,
          _,
@@ -1850,14 +1849,8 @@ get_mod({register,
          _,
          _}) ->
     xep0077;
-get_mod({pubsub_owner, _, _, _, _, _, _}) -> xep0060;
-get_mod({mam_result, _, _, _, _}) -> xep0313;
-get_mod({sm_failed, _, _, _, _}) -> xep0198;
-get_mod({upload_request, _, _, _, _}) -> xep0363;
 get_mod({service, _, _, _, _, _, _, _, _, _, _, _}) ->
     xep0215;
-get_mod({jingle_ft_checksum, _, _, _}) -> xep0234;
-get_mod({x509_request, _, _, _, _}) -> xep0417;
 get_mod({version, _, _, _}) -> xep0092;
 get_mod({vcard_org, _, _}) -> xep0054;
 get_mod({ps_items, _, _, _, _, _, _}) -> xep0060;
@@ -2101,4 +2094,11 @@ get_mod({jingle_ft_received, _, _}) -> xep0234;
 get_mod({bookmark_storage, _, _}) -> xep0048;
 get_mod({sasl_failure, _, _}) -> rfc6120;
 get_mod({adhoc_note, _, _}) -> xep0050;
+get_mod({stat, _, _, _, _}) -> xep0039;
+get_mod({pubsub_owner, _, _, _, _, _, _}) -> xep0060;
+get_mod({mam_result, _, _, _, _}) -> xep0313;
+get_mod({sm_failed, _, _, _, _}) -> xep0198;
+get_mod({upload_request, _, _, _, _}) -> xep0363;
+get_mod({jingle_ft_checksum, _, _, _}) -> xep0234;
+get_mod({x509_request, _, _, _, _}) -> xep0417;
 get_mod(Record) -> xmpp_codec_external:lookup(Record).
